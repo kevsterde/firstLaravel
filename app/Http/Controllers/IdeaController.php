@@ -9,19 +9,21 @@ class IdeaController extends Controller
 {
     //
 
+
     public function store()
     {
 
 
-        request()->validate([
-            'idea' => 'required|min:5|max:250',
+        $validated = request()->validate([
+            'content' => 'required|min:5|max:250',
         ]);
 
-        $content = request()->get("idea", null);
+        // $content = request()->all();
+
 
         $idea = Idea::create([
-            'name' => "Kevin",
-            "content" => $content,
+            'user_id' => auth()->id(),
+            "content" => $validated["content"],
         ]);
 
 
@@ -30,12 +32,48 @@ class IdeaController extends Controller
         return redirect()->route("dashboard")->with("success", "Idea Created Successfully");
     }
 
-    public function destroy($id)
+    public function destroy(Idea $idea)
     {
-        $idea = Idea::where("id", $id)->firstOrFail();
 
+        if (auth()->id() !== $idea->user_id) {
+            abort(404);
+        }
+        /* $idea = Idea::where("id", $id)->firstOrFail()->delete();
+        or
+        */
         $idea->delete();
 
-        return redirect()->route("dashboard")->with("deleted", "Idea Deleted Successfully");
+        return redirect()->route("dashboard")->with("success", "Idea Deleted Successfully");
+    }
+
+    public function show(Idea $idea)
+    {
+
+
+        /*   return view("idea.show", [
+            "idea" => $idea,
+        ]); */
+        return view("idea.show", compact("idea"));
+    }
+
+    public function edit(Idea $idea)
+    {
+        if (auth()->id() !== $idea->user_id) {
+            abort(404);
+        }
+        $editing = true;
+        return view("idea.show", compact("idea", 'editing'));
+    }
+
+    public function update(Idea $idea)
+    {
+        request()->validate([
+            'content' => 'required|min:5|max:250',
+        ]);
+
+        $idea->content = request()->get("content", '');
+        $idea->save();
+
+        return redirect()->route("ideas.show", $idea->id)->with('success', 'Updated Successfully');
     }
 }
