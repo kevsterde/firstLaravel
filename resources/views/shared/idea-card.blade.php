@@ -61,10 +61,7 @@
 
 
         <div class="d-flex justify-content-between">
-            <div>
-                <a href="#" class="fw-light nav-link fs-6"> <span class="fas fa-heart me-1">
-                    </span> {{ $idea->likes }} </a>
-            </div>
+            @include('idea.like')
             <div>
                 <span class="fs-6 fw-light text-muted"> <span class="fas fa-clock"> </span>
                     {{ $idea->created_at }} </span>

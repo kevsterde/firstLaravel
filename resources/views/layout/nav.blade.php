@@ -12,15 +12,18 @@
                     @guest
 
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{{ route('login') }}">Login</a>
+                            <a class="nav-link  {{ Route::is('login') ? 'text-white bg-primary rounded' : '' }}"
+                                aria-current="page" href="{{ route('login') }}">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">Register</a>
+                            <a class="nav-link {{ Route::is('register') ? 'text-white bg-primary rounded' : '' }}"
+                                href="{{ route('register') }}">Register</a>
                         </li>
                     @endguest
                     @auth
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('profile') }}">Welcome
+                            <a class="nav-link {{ Route::is('profile') ? 'text-white bg-primary rounded' : '' }}"
+                                href="{{ route('profile') }}">Welcome
                                 {{ Auth::user()->name }}!</a>
                         </li>
                         <li class="nav-item">
