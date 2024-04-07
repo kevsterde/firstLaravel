@@ -2,8 +2,8 @@
     <div class="px-3 pt-4 pb-2">
         <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center">
-                <img style="width:50px" class="me-2 avatar-sm rounded-circle" src="{{ $idea->user->getImageUrl() }}"
-                    alt="{{ $idea->user->name }}">
+                <img style="width:50px;aspect-ratio:1/1;object-fit:cover;" class="me-2 avatar-sm rounded-circle"
+                    src="{{ $idea->user->getImageUrl() }}" alt="{{ $idea->user->name }}">
                 <div>
                     <h5 class="card-title mb-0"><a href="{{ route('users.show', $idea->user->id) }}">
                             {{ $idea->user->name }}
@@ -64,7 +64,7 @@
             @include('idea.like')
             <div>
                 <span class="fs-6 fw-light text-muted"> <span class="fas fa-clock"> </span>
-                    {{ $idea->created_at }} </span>
+                    {{ $idea->created_at->diffForHumans() }} </span>
             </div>
         </div>
 

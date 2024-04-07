@@ -8,7 +8,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav">
+                <ul class="navbar-nav align-center">
                     @guest
 
                         <li class="nav-item">
@@ -26,11 +26,11 @@
                                 href="{{ route('profile') }}">Welcome
                                 {{ Auth::user()->name }}!</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item p-2">
                             <form action="{{ route('logout') }}" method="POST">
                                 @csrf
 
-                                <button type="submit" class="btn btn-danger btn-sm">Logout</button>
+                                <button type="submit" class="btn btn-danger btn-sm mt-1">Logout</button>
                             </form>
                         </li>
                     @endauth
