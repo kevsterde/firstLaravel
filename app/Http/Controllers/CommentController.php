@@ -15,9 +15,16 @@ class CommentController extends Controller
         $comment = new Comment();
         $comment->idea_id = $idea->id;
         $comment->user_id = auth()->user()->id;
-        $comment->content = request()->get("content");
+        $validated = request()->validate([
+            'comment' => 'required|min:5|max:250',
+        ]);
+        $comment->content = $validated["comment"];
         $comment->save();
 
+
+        // $validated = request()->validate([
+        //     'content' => 'required|min:5|max:250',
+        // ]);
         /*    $content = request()->get("content");
         $comment = Comment::create([
             "idea_id" => $idea->id,

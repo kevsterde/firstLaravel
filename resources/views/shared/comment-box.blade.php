@@ -6,7 +6,10 @@
 
 
         <div class="mb-3">
-            <textarea name="content" class="fs-6 form-control" rows="1"></textarea>
+            <textarea name="comment" class="fs-6 form-control" rows="1"></textarea>
+            {{-- @error('comment')
+                <span class="fs-6 text-danger ">{{ $message }}</span>
+            @enderror --}}
         </div>
         <div>
             <button class="btn btn-primary btn-sm"> Post Comment </button>

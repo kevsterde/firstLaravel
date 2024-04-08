@@ -21,6 +21,12 @@
                         </li>
                     @endguest
                     @auth
+                        @if (Auth::user()->is_admin)
+                            <li class="nav-item">
+                                <a class="nav-link {{ Route::is('admin.dashboard') ? 'text-white bg-primary rounded' : '' }}"
+                                    href="{{ route('admin.dashboard') }}">Admin Panel</a>
+                            </li>
+                        @endif
                         <li class="nav-item">
                             <a class="nav-link {{ Route::is('profile') ? 'text-white bg-primary rounded' : '' }}"
                                 href="{{ route('profile') }}">Welcome
