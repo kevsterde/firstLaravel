@@ -14,8 +14,8 @@
             <div>
                 @auth
 
-
-                    @if (Auth::user()->id == $idea->user->id)
+                    @can('idea.delete', $idea)
+                        {{-- @if (Auth::user()->id === $idea->user->id) --}}
                         <form method="POST" action=" {{ route('ideas.destroy', $idea->id) }}">
                             @csrf
                             @method('delete')
@@ -23,10 +23,12 @@
                             <a href="{{ route('ideas.show', $idea->id) }}">View</a>
                             <button class="btn btn-danger btn-sm">X</button>
                         </form>
-                    @endif
-                    @if (Auth::user()->id !== $idea->user->id)
+                        {{-- @endif --}}
+                    @endcan
+                    @cannot('idea.delete', $idea)
+                        {{-- @if (Auth::user()->id !== $idea->user->id) --}}
                         <a href="{{ route('ideas.show', $idea->id) }}">View</a>
-                    @endif
+                    @endcannot
                 @endauth
 
 
