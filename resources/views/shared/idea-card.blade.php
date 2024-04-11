@@ -14,7 +14,7 @@
             <div>
                 @auth
 
-                    @can('idea.delete', $idea)
+                    @can('delete', $idea)
                         {{-- @if (Auth::user()->id === $idea->user->id) --}}
                         <form method="POST" action=" {{ route('ideas.destroy', $idea->id) }}">
                             @csrf
@@ -25,7 +25,7 @@
                         </form>
                         {{-- @endif --}}
                     @endcan
-                    @cannot('idea.delete', $idea)
+                    @cannot('delete', $idea)
                         {{-- @if (Auth::user()->id !== $idea->user->id) --}}
                         <a href="{{ route('ideas.show', $idea->id) }}">View</a>
                     @endcannot
