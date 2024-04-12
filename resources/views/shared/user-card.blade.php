@@ -12,13 +12,11 @@
                 </div>
             </div>
 
-            @auth
-                @if (Auth::id() === $user->id)
-                    <div class="align-self-start">
-                        <a href="{{ route('users.edit', $user->id) }}">Edit</a>
-                    </div>
-                @endif
-            @endauth
+            @can('update', $user)
+                <div class="align-self-start">
+                    <a href="{{ route('users.edit', $user->id) }}">Edit</a>
+                </div>
+            @endcan
 
 
         </div>
