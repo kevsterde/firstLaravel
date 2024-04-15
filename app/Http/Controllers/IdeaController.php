@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\IdeaRequest;
 use App\Models\Idea;
 use Illuminate\Http\Request;
 
@@ -10,16 +11,15 @@ class IdeaController extends Controller
     //
 
 
-    public function store()
+    public function store(IdeaRequest $request)
     {
 
 
-        $validated = request()->validate([
-            'content' => 'required|min:5|max:250',
-        ]);
+        $validated = $request->validated();
 
         // $content = request()->all();
 
+        // $validated['user_id'] = auth()->id();
 
         $idea = Idea::create([
             'user_id' => auth()->id(),
@@ -68,15 +68,16 @@ class IdeaController extends Controller
         return view("idea.show", compact("idea", 'editing'));
     }
 
-    public function update(Idea $idea)
+    public function update(IdeaRequest $request, Idea $idea)
     {
 
         $this->authorize("update", $idea);
-        request()->validate([
-            'content' => 'required|min:5|max:250',
-        ]);
-
-        $idea->content = request()->get("content", '');
+        // request()->validate([
+        //     'content' => 'required|min:5|max:250',
+        // ]);
+        $validated = $request->validated();
+        $idea->content =  $validated["content"];
+        // $idea->content = $request->validated()->get("content", '');
         $idea->save();
 
         return redirect()->route("ideas.show", $idea->id)->with('success', 'Updated Successfully');

@@ -12,7 +12,7 @@ class DashboardController extends Controller
     function index()
     {
         $idea = Idea::orderBy('created_at', 'desc');
-        // $idea = Idea::without('user')->orderBy('created_at', 'desc');
+        // $idea = Idea::with('user')->orderBy('created_at', 'desc');
         // $idea = Idea::with('user', 'comments.user')->orderBy('created_at', 'desc');
 
 

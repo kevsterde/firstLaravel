@@ -9,6 +9,8 @@ class Idea extends Model
 {
     use HasFactory;
     protected $with = ['user:id,name,image', 'comments.user:id,name,image'];
+    protected $withCount = ['likes'];
+
     // protected $with = ['user', 'comments.user'];
     protected $fillable = [
         'user_id',

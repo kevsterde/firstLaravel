@@ -1,3 +1,5 @@
+@section('title', 'Idea ' . $idea->id)
+
 <div class="card">
     <div class="px-3 pt-4 pb-2">
         <div class="d-flex align-items-center justify-content-between">
