@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 class UserController extends Controller
 {
 
+
     /**
      * Display the specified resource.
      */
@@ -39,6 +40,8 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
+
+
         $this->authorize("update", $user);
 
         $validated = $request->validated();
